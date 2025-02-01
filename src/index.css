@@ -1,0 +1,191 @@
+:root {
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+
+	color-scheme: light dark;
+	color: rgba(255, 255, 255, 0.87);
+	background-color: #242424;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+/* 📌 Глобальные стили */
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, sans-serif;
+	background-color: #121212; /* Тёмный фон */
+	color: white;
+}
+
+/* 📌 Контейнер страницы */
+.page-container {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+/* 📌 Верхняя панель */
+.header {
+	background-color: #008069; /* Тёмно-зелёный */
+	color: white;
+	padding: 15px;
+	font-size: 18px;
+	font-weight: bold;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 📌 Контейнер чата */
+.chat-container {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	overflow-y: auto;
+	background-color: #1e1e1e; /* Тёмно-серый фон */
+}
+
+/* 📌 Сообщения */
+.message {
+	max-width: 60%;
+	padding: 10px;
+	border-radius: 8px;
+	margin-bottom: 10px;
+	word-wrap: break-word;
+	font-size: 15px;
+}
+
+/* 📌 Исходящие сообщения */
+.message.sent {
+	background-color: #00a884; /* Зелёный */
+	color: white;
+	align-self: flex-end;
+}
+
+/* 📌 Входящие сообщения */
+.message.received {
+	background-color: #252525; /* Тёмно-серый */
+	color: white;
+	align-self: flex-start;
+}
+
+/* 📌 Поле ввода */
+.input-container {
+	display: flex;
+	padding: 10px;
+	background: #181818; /* Чёрный */
+	border-top: 1px solid #008069;
+}
+
+.input-container input {
+	flex: 1;
+	padding: 10px;
+	border: 1px solid #008069;
+	border-radius: 5px;
+	background: #121212; /* Чёрный */
+	color: white;
+	outline: none;
+}
+
+.input-container button {
+	margin-left: 10px;
+	padding: 10px 15px;
+	background-color: #008069;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.input-container button:hover {
+	background-color: #005c4b;
+}
+
+/* 📌 Список контактов */
+.contacts-container {
+	flex: 1;
+	padding: 10px;
+	overflow-y: auto;
+}
+
+.contact-item {
+	padding: 15px;
+	background: #252525;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: 0.3s;
+	color: white;
+}
+
+.contact-item:hover {
+	background: #008069;
+}
+
+/* 📌 Логин */
+.login-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background: #121212;
+}
+
+.login-form {
+	background: #181818;
+	padding: 25px;
+	border-radius: 10px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+	width: 350px;
+	text-align: center;
+}
+
+.login-form h1 {
+	color: #00a884;
+	font-size: 22px;
+	margin-bottom: 20px;
+}
+
+.login-form label {
+	display: block;
+	text-align: left;
+	margin-bottom: 5px;
+	font-size: 14px;
+	font-weight: bold;
+	color: white;
+}
+
+.login-form input {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 15px;
+	border: 1px solid #008069;
+	border-radius: 5px;
+	background: #252525;
+	color: white;
+	outline: none;
+}
+
+.login-form button {
+	width: 100%;
+	padding: 10px;
+	background-color: #008069;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	transition: 0.3s;
+}
+
+.login-form button:hover {
+	background-color: #005c4b;
+}
