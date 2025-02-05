@@ -16,7 +16,7 @@ export const useAuthStore = create<{
 	login: async (idInstance, apiTokenInstance) => {
 		try {
 			await axios.post(
-				'http://localhost:5050/api/login',
+				'https://kacbj2n6.up.railway.app/api',
 				{ idInstance, apiTokenInstance },
 				{ withCredentials: true } // Отправляем куки
 			)
@@ -29,7 +29,7 @@ export const useAuthStore = create<{
 
 	checkAuth: async () => {
 		try {
-			const response = await axios.get('http://localhost:5050/api/auth', {
+			const response = await axios.get('https://kacbj2n6.up.railway.app/api', {
 				withCredentials: true,
 			})
 
@@ -46,7 +46,7 @@ export const useAuthStore = create<{
 	logout: async () => {
 		try {
 			await axios.post(
-				'http://localhost:5050/api/logout',
+				'https://kacbj2n6.up.railway.app/api',
 				{},
 				{ withCredentials: true }
 			)
