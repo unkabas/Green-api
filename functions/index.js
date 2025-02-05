@@ -14,6 +14,7 @@ app.use(
 
 app.use(express.json())
 
+// API роут
 app.get('/api', (req, res) => {
 	res.json({ message: 'API работает!' })
 })
