@@ -8,11 +8,16 @@ dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 5050
 
-// **✅ Добавляем CORS**
+// ✅ **Правильные настройки CORS**
+const allowedOrigins = [
+	'http://localhost:5173', // Для локальной разработки
+	'https://green-18bd1.web.app', // Firebase Production
+]
+
 app.use(
 	cors({
-		origin: 'http://localhost:5173', // Разрешаем запросы с твоего фронта
-		credentials: true, // Разрешаем куки и авторизационные заголовки
+		origin: allowedOrigins, // ✅ Разрешаем оба адреса
+		credentials: true, // ✅ Разрешаем куки и заголовки авторизации
 	})
 )
 
@@ -30,14 +35,14 @@ app.post('/api/login', (req, res) => {
 	// Устанавливаем `httpOnly` cookie (невидимо для JavaScript)
 	res.cookie('idInstance', idInstance, {
 		httpOnly: true,
-		secure: false, // Включи true, если используешь HTTPS
-		sameSite: 'Lax',
+		secure: true, // ✅ Должно быть `true` для HTTPS
+		sameSite: 'None', // ✅ Нужно для кросс-доменных запросов
 	})
 
 	res.cookie('apiTokenInstance', apiTokenInstance, {
 		httpOnly: true,
-		secure: false,
-		sameSite: 'Lax',
+		secure: true, // ✅ Обязательно для Firebase + Railway
+		sameSite: 'None', // ✅ Фикс CORS-проблем
 	})
 
 	return res.json({ message: 'Авторизация успешна!' })
@@ -56,23 +61,14 @@ app.get('/api/auth', (req, res) => {
 
 // **3. Выход (удаляем куки)**
 app.post('/api/logout', (req, res) => {
-	res.clearCookie('idInstance')
-	res.clearCookie('apiTokenInstance')
+	res.clearCookie('idInstance', { sameSite: 'None', secure: true })
+	res.clearCookie('apiTokenInstance', { sameSite: 'None', secure: true })
 	return res.json({ message: 'Вы вышли' })
 })
 
-// **✅ Разрешаем все методы CORS (для страховки)**
-app.use((req, res, next) => {
-	res.header('Access-Control-Allow-Origin', 'http://localhost:5173')
-	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-	res.header(
-		'Access-Control-Allow-Headers',
-		'Origin, Content-Type, Accept, Authorization'
-	)
-	res.header('Access-Control-Allow-Credentials', 'true')
-	next()
-})
+// **✅ Фикс preflight-запросов OPTIONS**
+app.options('*', cors())
 
 app.listen(PORT, () =>
-	console.log(`Сервер запущен на http://localhost:${PORT}`)
+	console.log(`🚀 Сервер запущен на http://localhost:${PORT}`)
 )
