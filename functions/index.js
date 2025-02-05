@@ -1,12 +1,12 @@
-const express = require('express')
-const cors = require('cors')
+import cors from 'cors'
+import express from 'express'
 
 const app = express()
 
-// 🟢 Разрешаем CORS для всех (можно ограничить только для Firebase)
+// Разрешаем CORS
 app.use(
 	cors({
-		origin: 'https://green-18bd1.web.app', // Разрешаем только фронтенд
+		origin: 'https://green-18bd1.web.app',
 		methods: 'GET,POST,PUT,DELETE',
 		allowedHeaders: 'Content-Type,Authorization',
 	})
@@ -14,12 +14,11 @@ app.use(
 
 app.use(express.json())
 
-// Пример API
 app.get('/api', (req, res) => {
 	res.json({ message: 'API работает!' })
 })
 
-// 🟢 Если API не найден — показываем 404
+// 404 обработчик
 app.use((req, res) => {
 	res.status(404).json({ error: 'Not Found' })
 })
