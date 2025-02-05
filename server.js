@@ -3,23 +3,23 @@ import express from 'express'
 
 const app = express()
 
-// Разрешаем CORS
+// 🟢 Разрешаем CORS для всех (можно ограничить только для Firebase)
 app.use(
 	cors({
-		origin: 'https://green-18bd1.web.app',
-		methods: 'GET,POST,PUT,DELETE',
+		origin: 'https://green-18bd1.web.app', // Разрешаем только фронтенд
+		methods: 'GET, POST, PUT, DELETE',
 		allowedHeaders: 'Content-Type,Authorization',
 	})
 )
 
 app.use(express.json())
 
-// API роут
+// 🔥 Проверь, есть ли API роут
 app.get('/api', (req, res) => {
 	res.json({ message: 'API работает!' })
 })
 
-// 404 обработчик
+// 🟢 404 для любых неизвестных маршрутов
 app.use((req, res) => {
 	res.status(404).json({ error: 'Not Found' })
 })
